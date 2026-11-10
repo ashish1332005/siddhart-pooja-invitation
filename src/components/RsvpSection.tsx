@@ -318,20 +318,25 @@ export function RsvpSection() {
             {t("rsvp.title")}
           </h2>
           <span className="section-rule !my-2.5" />
-          <p className="font-body text-xs sm:text-sm text-sage-dark/85 mt-2">
-            RSVP:{" "}
-            {WEDDING_CONFIG.rsvp_phones.map((phone, i) => (
-              <React.Fragment key={i}>
-                {i > 0 && " · "}
-                <a
-                  href={`tel:+91${phone.replace(/[\s-]+/g, "")}`}
-                  className="font-digit text-sage-dark hover:text-gold-dark transition-colors font-semibold"
-                >
-                  {phone}
-                </a>
-              </React.Fragment>
+          <div className="font-serif text-sm sm:text-base text-sage-dark space-y-1.5 mt-2">
+            {WEDDING_CONFIG.rsvp_contacts.map((contact, idx) => (
+              <p key={idx}>
+                <span className="font-semibold text-[#7c2635]">{contact.name}</span>
+                {" \u2013 "}
+                {contact.phones.map((phone, pIdx) => (
+                  <React.Fragment key={pIdx}>
+                    {pIdx > 0 && ", "}
+                    <a
+                      href={`tel:+91${phone.replace(/\D/g, "")}`}
+                      className="font-digit text-sage-dark hover:text-[#b88e44] transition-colors font-semibold"
+                    >
+                      {phone}
+                    </a>
+                  </React.Fragment>
+                ))}
+              </p>
             ))}
-          </p>
+          </div>
         </motion.div>
 
         <motion.div

@@ -220,26 +220,6 @@ export function FamilySection() {
             </div>
           </div>
         </motion.div>
-
-        {/* 11. RSVP Contacts */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="pt-4 space-y-2 max-w-md mx-auto"
-        >
-          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
-            RSVP
-          </h3>
-          <div className="space-y-1.5 font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-semibold">
-            {FAMILY_DETAILS.rsvp.map((contact, idx) => (
-              <p key={idx}>
-                <span className="text-[#7c2635]">{contact.name}</span> &ndash; {contact.phones}
-              </p>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
