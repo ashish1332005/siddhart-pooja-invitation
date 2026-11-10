@@ -57,7 +57,7 @@ export function FamilySection() {
             Maternal Side
           </h3>
           <div className="font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed space-y-1">
-            <p className="font-semibold text-[#1e3a2f]">
+            <p className="font-semibold">
               {FAMILY_DETAILS.maternal_side.elders}
             </p>
             <p>{FAMILY_DETAILS.maternal_side.family}</p>
@@ -111,7 +111,7 @@ export function FamilySection() {
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
             Sharing the Joy
           </h3>
-          <div className="space-y-1 font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-medium leading-relaxed">
+          <div className="space-y-1 font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
             {FAMILY_DETAILS.sharing_the_joy.map((item, idx) => (
               <p key={idx}>{item}</p>
             ))}
@@ -163,7 +163,7 @@ export function FamilySection() {
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
             Gazing Eyelids
           </h3>
-          <p className="font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-medium leading-relaxed">
+          <p className="font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
             {FAMILY_DETAILS.gazing_eyelids.join(", ")}
           </p>
         </motion.div>
@@ -211,7 +211,7 @@ export function FamilySection() {
               <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#b88e44]" />
             </div>
 
-            <div className="space-y-1.5 sm:space-y-2.5 font-serif text-xs sm:text-sm md:text-base text-[#1e3a2f] font-bold leading-snug">
+            <div className="space-y-1.5 sm:space-y-2.5 font-serif text-xs sm:text-sm md:text-base text-[#7c2635] font-bold leading-snug">
               {FAMILY_DETAILS.business_concerns.map((name, i) => (
                 <p key={i} className="whitespace-nowrap tracking-wide">
                   {name}
