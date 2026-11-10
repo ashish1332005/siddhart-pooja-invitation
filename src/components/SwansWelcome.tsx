@@ -61,8 +61,8 @@ export function SwansWelcome() {
           className="font-serif text-[#163328] font-bold leading-[1.28]"
           style={{ fontSize: "clamp(16px, 4.6vw, 26px)" }}
         >
-          Late Shri Bankatlal Ji &amp;<br />
-          Late Smt. Vidhyadevi Malani
+          Late Smt. Kamla Devi &amp;<br />
+          Shri Ram Pal Laddha
         </p>
 
         {/* 5. Golden Ornate Flourish Divider */}

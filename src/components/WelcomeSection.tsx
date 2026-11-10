@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MEDIA, WEDDING_CONFIG } from "../data/weddingConfig";
+import { WEDDING_CONFIG } from "../data/weddingConfig";
 
 function formatLineageColumn(text: string) {
   if (text.includes(" - ")) {
@@ -31,7 +31,7 @@ export function WelcomeSection() {
           className="space-y-3 sm:space-y-4"
         >
           <p className="font-serif text-sm sm:text-base md:text-lg tracking-[0.22em] text-[#a3702c] font-normal">
-            || Shree Ramji ||
+            {WEDDING_CONFIG.ramji_mantra}
           </p>
 
           <p className="font-serif text-base sm:text-xl md:text-2xl text-[#1e3a2f] max-w-md sm:max-w-lg mx-auto leading-[1.45] font-medium px-2">
@@ -65,37 +65,10 @@ export function WelcomeSection() {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rotate-45 border border-[#a3702c] bg-ivory" />
             </div>
 
-            {/* Groom Column */}
+            {/* Bride Column (Pooja) */}
             <div className="flex flex-col items-center text-center px-0.5 sm:px-2 space-y-2">
               <h3 className="font-couple text-[#7c2635] text-4xl sm:text-5xl md:text-6xl font-normal leading-tight">
                 {WEDDING_CONFIG.couple_name_1}
-              </h3>
-
-              <div className="space-y-3.5 pt-1 w-full">
-                <div>
-                  <span className="font-serif text-[11px] sm:text-xs tracking-wider uppercase text-[#a3702c] font-semibold block mb-0.5">
-                    GS/O
-                  </span>
-                  <div className="font-serif text-[11px] sm:text-sm md:text-base text-[#1e3a2f] font-medium">
-                    {formatLineageColumn(WEDDING_CONFIG.groom_grand_parents)}
-                  </div>
-                </div>
-
-                <div>
-                  <span className="font-serif text-[11px] sm:text-xs tracking-wider uppercase text-[#a3702c] font-semibold block mb-0.5">
-                    S/O
-                  </span>
-                  <div className="font-serif text-[11px] sm:text-sm md:text-base text-[#1e3a2f] font-medium">
-                    {formatLineageColumn(WEDDING_CONFIG.groom_parents)}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Bride Column */}
-            <div className="flex flex-col items-center text-center px-0.5 sm:px-2 space-y-2">
-              <h3 className="font-couple text-[#7c2635] text-4xl sm:text-5xl md:text-6xl font-normal leading-tight">
-                {WEDDING_CONFIG.couple_name_2}
               </h3>
 
               <div className="space-y-3.5 pt-1 w-full">
@@ -118,6 +91,33 @@ export function WelcomeSection() {
                 </div>
               </div>
             </div>
+
+            {/* Groom Column (Siddhart) */}
+            <div className="flex flex-col items-center text-center px-0.5 sm:px-2 space-y-2">
+              <h3 className="font-couple text-[#7c2635] text-4xl sm:text-5xl md:text-6xl font-normal leading-tight">
+                {WEDDING_CONFIG.couple_name_2}
+              </h3>
+
+              <div className="space-y-3.5 pt-1 w-full">
+                <div>
+                  <span className="font-serif text-[11px] sm:text-xs tracking-wider uppercase text-[#a3702c] font-semibold block mb-0.5">
+                    GS/O
+                  </span>
+                  <div className="font-serif text-[11px] sm:text-sm md:text-base text-[#1e3a2f] font-medium">
+                    {formatLineageColumn(WEDDING_CONFIG.groom_grand_parents)}
+                  </div>
+                </div>
+
+                <div>
+                  <span className="font-serif text-[11px] sm:text-xs tracking-wider uppercase text-[#a3702c] font-semibold block mb-0.5">
+                    S/O
+                  </span>
+                  <div className="font-serif text-[11px] sm:text-sm md:text-base text-[#1e3a2f] font-medium">
+                    {formatLineageColumn(WEDDING_CONFIG.groom_parents)}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -130,11 +130,11 @@ export function WelcomeSection() {
           className="mt-8 md:mt-10 pt-3 space-y-3.5"
         >
           <p className="font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-medium max-w-md mx-auto leading-[1.45] px-2">
-            cordially invite you to grace the auspicious<br />
-            occasion of the wedding of their children
+            Invite You To Share Their Joy At The<br />
+            Wedding Celebrations Of Their Grand Daughter
           </p>
 
-          {/* Date Block - Solid Contiguous Text with No Floating Superscripts or Extra Gaps */}
+          {/* Date Block */}
           <p className="font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-semibold tracking-wide whitespace-nowrap pt-1">
             03RD &ndash; 05TH <span className="tracking-[0.16em] uppercase ml-2 font-semibold">DECEMBER 2026</span>
           </p>

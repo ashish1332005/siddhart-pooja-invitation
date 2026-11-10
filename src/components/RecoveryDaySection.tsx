@@ -59,7 +59,7 @@ export function RecoveryDaySection() {
             {WEDDING_CONFIG.bhilwara_venue_name}
           </h3>
           <p className="font-body text-xs sm:text-sm tracking-[0.18em] uppercase text-gold-dark font-semibold mb-4">
-            10-B-18, R.C. Vyas Colony, Bhilwara (Rajasthan)
+            {WEDDING_CONFIG.bhilwara_venue_address}
           </p>
 
           <div className="flex flex-col items-center gap-2 pt-1">

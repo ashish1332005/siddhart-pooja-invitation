@@ -13,7 +13,7 @@ import { ActionMenu } from "./ActionMenu";
 export function WeddingEventsSection() {
   const address = WEDDING_CONFIG.main_venue_address;
   const calendarEvent = {
-    title: "Siddhart & Pooja – Shubh Vivaah Celebrations",
+    title: `${WEDDING_CONFIG.couple_name_1} & ${WEDDING_CONFIG.couple_name_2} \u2013 Shubh Vivaah Celebrations`,
     location: address,
     startLocal: "20261205T111500",
     endLocal: "20261205T235900",

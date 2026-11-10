@@ -12,13 +12,13 @@ const enTranslations: Record<string, string> = {
   "countdown.seconds": "Seconds",
   "welcome.title": "Shubh Vivaah",
   "welcome.ganesh": "।। श्री गणेशाय नमः ।।",
-  "welcome.ramji": "|| Shree Ramji ||",
+  "welcome.ramji": "|| Shrimad Ramcharanaya Namah ||",
   "welcome.quote":
     '"No Measure Of Time With You Will Be Long Enough, But Let\'s Start With Forever"',
   "welcome.blessings": "With The Blessings Of",
   "welcome.parents":
-    "Invite You To Share Their Joy At The Wedding Celebrations Of Their Beloved Son & Daughter",
-  "welcome.couple": "Siddhart & Pooja",
+    "Invite You To Share Their Joy At The Wedding Celebrations Of Their Grand Daughter",
+  "welcome.couple": "Pooja & Siddhart",
   "events.title": "Wedding Celebrations\n& Sacred Vows",
   "events.subtitle": "Where we celebrate",
   "events.date": "03 - 05 December 2026",
@@ -43,7 +43,7 @@ const enTranslations: Record<string, string> = {
   "rsvp.shuttle": "Yes, please coordinate with us",
   "rsvp.valet": "No, we are arriving directly",
   "rsvp.message": "Warm wishes & blessings for the couple",
-  "rsvp.messagePlaceholder": "Write your blessings or a sweet note for Siddhart & Pooja…",
+  "rsvp.messagePlaceholder": "Write your blessings or a sweet note for Pooja & Siddhart…",
   "rsvp.sending": "Sending…",
   "rsvp.send": "Send RSVP",
   "confirm.thankYou": "Thank You",
@@ -54,7 +54,7 @@ const enTranslations: Record<string, string> = {
   "confirm.lookForward": "We look forward to welcoming you on:",
   "confirm.addCalendar": "Add to Calendar",
   "confirm.plansChange":
-    "For any changes or travel assistance, please reach out directly to the Malani family coordinators.",
+    "For any changes or travel assistance, please reach out directly to the Laddha family coordinators.",
   "footer.madeBy": "Made with love for",
 };
 

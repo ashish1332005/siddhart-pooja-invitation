@@ -252,10 +252,10 @@ export function RsvpSection() {
       }
     }
 
-    // Build pre-formatted WhatsApp RSVP message for 8949-674449
-    const rsvpPhone = (WEDDING_CONFIG.rsvp_phones[0] || "8949-674449").replace(/\D/g, "");
+    // Build pre-formatted WhatsApp RSVP message
+    const rsvpPhone = (WEDDING_CONFIG.rsvp_phones[0] || "9413864415").replace(/\D/g, "");
     const lines = [
-      `*Wedding RSVP – Siddhart & Pooja (3rd–5th Dec 2026)*`,
+      `*Wedding RSVP – Pooja & Siddhart (3rd–5th Dec 2026)*`,
       `• *Name:* ${guestName}`,
       `• *Attending:* ${formData.attendance === "yes" ? "Yes, joyfully attending!" : "Regretfully unable to attend"}`,
     ];

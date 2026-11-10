@@ -41,7 +41,7 @@ export function FooterSection({
         </div>
 
         <p className="text-xs sm:text-sm text-sage-dark/85 mt-2 font-body font-normal">
-          With Best Compliments from Malani &amp; Laddha Family
+          With Best Compliments from Laddha &amp; Malani Family
         </p>
       </motion.div>
     </footer>

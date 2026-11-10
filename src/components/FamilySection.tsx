@@ -27,7 +27,7 @@ export function FamilySection() {
           </p>
         </motion.div>
 
-        {/* 1. We Look Forward To Welcoming You (Compliments) */}
+        {/* 1. With Best Compliments */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -36,34 +36,16 @@ export function FamilySection() {
           className="space-y-3"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
-            We Look Forward To Welcoming You
+            With Best Compliments
           </h3>
           <div className="space-y-1 sm:space-y-1.5 font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
             {FAMILY_DETAILS.compliments.map((item, idx) => (
-              <p key={idx}>{item.replace(/-/g, " \u2013 ")}</p>
+              <p key={idx}>{item}</p>
             ))}
           </div>
         </motion.div>
 
-        {/* 2. Awaiting the joy of your Presence (Welcome By) */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-3"
-        >
-          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
-            Awaiting the joy of your Presence
-          </h3>
-          <div className="space-y-1 sm:space-y-1.5 font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
-            {FAMILY_DETAILS.welcome_by.map((item, idx) => (
-              <p key={idx}>{item.replace(/-/g, " \u2013 ")}</p>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 3. The Maternal Family (Nanihal) */}
+        {/* 2. Maternal Side */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -72,33 +54,50 @@ export function FamilySection() {
           className="space-y-2.5 max-w-lg mx-auto"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
-            The Maternal Family
+            Maternal Side
           </h3>
           <div className="font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed space-y-1">
             <p className="font-semibold text-[#1e3a2f]">
-              {FAMILY_DETAILS.maternal_side.elders.replace(/-/g, " \u2013 ")}
+              {FAMILY_DETAILS.maternal_side.elders}
             </p>
             <p>{FAMILY_DETAILS.maternal_side.family}</p>
-            <p className="text-xs sm:text-sm text-[#1e3a2f]/80 pt-0.5">
-              {FAMILY_DETAILS.maternal_side.others.join("  \u2022  ")}
-            </p>
           </div>
         </motion.div>
 
-        {/* 4. Samdhi Family */}
+        {/* 3. Welcome By */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="space-y-2.5 max-w-xl mx-auto"
+          className="space-y-3"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
-            Samdhi Family
+            Welcome By
           </h3>
-          <p className="font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
-            {FAMILY_DETAILS.samdhi_pravar}
-          </p>
+          <div className="space-y-1 sm:space-y-1.5 font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
+            {FAMILY_DETAILS.welcome_by.map((item, idx) => (
+              <p key={idx}>{item.replace(/-/g, " \u2013 ")}</p>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* 4. Special Request */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-2 max-w-lg mx-auto"
+        >
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
+            Special Request
+          </h3>
+          <div className="space-y-1 font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
+            {FAMILY_DETAILS.special_request.map((item, idx) => (
+              <p key={idx}>{item.replace(/-/g, " \u2013 ")}</p>
+            ))}
+          </div>
         </motion.div>
 
         {/* 5. Sharing The Joy */}
@@ -110,14 +109,16 @@ export function FamilySection() {
           className="space-y-2 max-w-lg mx-auto"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
-            Sharing The Joy
+            Sharing the Joy
           </h3>
-          <p className="font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-medium leading-relaxed">
-            {FAMILY_DETAILS.sharing_the_joy.join("  \u2022  ")}
-          </p>
+          <div className="space-y-1 font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-medium leading-relaxed">
+            {FAMILY_DETAILS.sharing_the_joy.map((item, idx) => (
+              <p key={idx}>{item}</p>
+            ))}
+          </div>
         </motion.div>
 
-        {/* 6. Warm Regards */}
+        {/* 6. Awaiting your Presence */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -126,14 +127,16 @@ export function FamilySection() {
           className="space-y-2 max-w-lg mx-auto"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
-            Warm Regards
+            Awaiting your Presence
           </h3>
-          <p className="font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-medium leading-relaxed">
-            {FAMILY_DETAILS.warm_regards.join(", ")}
-          </p>
+          <div className="space-y-1 font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
+            {FAMILY_DETAILS.awaiting_presence.map((item, idx) => (
+              <p key={idx}>{item}</p>
+            ))}
+          </div>
         </motion.div>
 
-        {/* 7. Sweet Request from Misshkaa Dad */}
+        {/* 7. Sweet Request */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -141,18 +144,47 @@ export function FamilySection() {
           transition={{ duration: 0.6 }}
           className="pt-2 pb-1"
         >
-          <span className="font-couple text-3xl sm:text-4xl text-[#7c2635] block mb-1">
-            {FAMILY_DETAILS.sweet_request.tagline}
-          </span>
-          <p className="font-serif italic text-base sm:text-lg md:text-xl text-[#1e3a2f] my-1 leading-relaxed">
-            &ldquo;{FAMILY_DETAILS.sweet_request.note}&rdquo;
-          </p>
-          <p className="font-serif font-semibold text-[#a3702c] text-xs sm:text-sm tracking-wider uppercase mt-2">
-            {FAMILY_DETAILS.sweet_request.by}
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal mb-1">
+            Sweet Request
+          </h3>
+          <p className="font-serif font-semibold text-[#7c2635] text-base sm:text-lg md:text-xl tracking-wide mt-1">
+            {FAMILY_DETAILS.sweet_request.name}
           </p>
         </motion.div>
 
-        {/* 8. Business Concerns - Exclusively Encased in Royal Gift Frame */}
+        {/* 8. Gazing Eyelids */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-1 max-w-lg mx-auto"
+        >
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
+            Gazing Eyelids
+          </h3>
+          <p className="font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-medium leading-relaxed">
+            {FAMILY_DETAILS.gazing_eyelids.join(", ")}
+          </p>
+        </motion.div>
+
+        {/* 9. Samdhi Pravar */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-2.5 max-w-xl mx-auto"
+        >
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
+            Samdhi Pravar
+          </h3>
+          <p className="font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-medium leading-relaxed">
+            {FAMILY_DETAILS.samdhi_pravar}
+          </p>
+        </motion.div>
+
+        {/* 10. Business Concerns - Royal Gift Frame */}
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -186,6 +218,26 @@ export function FamilySection() {
                 </p>
               ))}
             </div>
+          </div>
+        </motion.div>
+
+        {/* 11. RSVP Contacts */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="pt-4 space-y-2 max-w-md mx-auto"
+        >
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#7d6736] tracking-wide font-normal">
+            RSVP
+          </h3>
+          <div className="space-y-1.5 font-serif text-sm sm:text-base md:text-lg text-[#1e3a2f] font-semibold">
+            {FAMILY_DETAILS.rsvp.map((contact, idx) => (
+              <p key={idx}>
+                <span className="text-[#7c2635]">{contact.name}</span> &ndash; {contact.phones}
+              </p>
+            ))}
           </div>
         </motion.div>
       </div>
