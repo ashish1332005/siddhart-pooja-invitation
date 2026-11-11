@@ -33,22 +33,6 @@ export const WEDDING_CONFIG = {
 
 export const WEDDING_SCHEDULE = [
   {
-    dayNumber: "01",
-    dayName: "Tuesday",
-    dateFull: "01st December 2026",
-    title: "Wedding Rituals",
-    location: "48, Jambeshwar Nagar, Bhilwara (Raj.)",
-    mantra: "|| Shri Charbhujaya Namah ||",
-    events: [
-      {
-        name: "Hathdhan",
-        time: "11:00 AM",
-        note: "(FOLLOWED BY LUNCH)",
-        venue: "48, Jambeshwar Nagar, Bhilwara (Raj.)",
-      },
-    ],
-  },
-  {
     dayNumber: "03",
     dayName: "Thursday",
     dateFull: "03rd December 2026",

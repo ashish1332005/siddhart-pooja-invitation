@@ -14,8 +14,11 @@ export interface StoredGuestRsvp {
   guest_count: number;
   adult_count: number;
   children_count: number;
+  travel_mode?: string;
+  arrival_date?: string;
+  arrival_time?: string;
+  departure_date?: string;
   dietary_requirements?: string;
-  transportation?: "shuttle" | "valet";
   message?: string;
   responded_at: string;
 }
@@ -204,17 +207,23 @@ export function RsvpSection() {
   const [formData, setFormData] = useState<{
     attendance: "yes" | "no";
     fullName: string;
+    travelMode: string;
+    arrivalDate: string;
+    arrivalTime: string;
+    departureDate: string;
     dietary: string;
     message: string;
     website: string;
-    transportation: "shuttle" | "valet";
   }>({
     attendance: "yes",
     fullName: "",
+    travelMode: "Flight",
+    arrivalDate: "2026-12-03",
+    arrivalTime: "12:00",
+    departureDate: "2026-12-05",
     dietary: "",
     message: "",
     website: "",
-    transportation: "shuttle",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -229,10 +238,13 @@ export function RsvpSection() {
       guest_count: 1,
       adult_count: 1,
       children_count: 0,
+      travel_mode: formData.attendance === "yes" ? formData.travelMode : undefined,
+      arrival_date: formData.attendance === "yes" ? formData.arrivalDate : undefined,
+      arrival_time: formData.attendance === "yes" ? formData.arrivalTime : undefined,
+      departure_date: formData.attendance === "yes" ? formData.departureDate : undefined,
       dietary_requirements:
         formData.attendance === "yes" && formData.dietary ? formData.dietary : undefined,
       message: formData.message || undefined,
-      transportation: formData.attendance === "yes" ? formData.transportation : undefined,
     };
 
     saveGuestRsvp(rsvpEntry);
@@ -260,15 +272,14 @@ export function RsvpSection() {
       `• *Attending:* ${formData.attendance === "yes" ? "Yes, joyfully attending!" : "Regretfully unable to attend"}`,
     ];
     if (formData.attendance === "yes") {
-      lines.push(
-        `• *Transport in Udaipur:* ${
-          formData.transportation === "shuttle"
-            ? "Station / Airport Pickup & Resort Transfers"
-            : "Arriving by Own Vehicle (Valet Parking)"
-        }`
-      );
+      lines.push(`• *Mode of Travel:* ${formData.travelMode}`);
+      lines.push(`• *Arrival Date:* ${formData.arrivalDate}`);
+      if (formData.arrivalTime) {
+        lines.push(`• *Arrival Time:* ${formData.arrivalTime}`);
+      }
+      lines.push(`• *Departure Date:* ${formData.departureDate}`);
       if (formData.dietary.trim()) {
-        lines.push(`• *Dietary / Jain Notes:* ${formData.dietary.trim()}`);
+        lines.push(`• *Dietary / Special Requests:* ${formData.dietary.trim()}`);
       }
     }
     if (formData.message.trim()) {
@@ -431,74 +442,105 @@ export function RsvpSection() {
             </div>
 
             {formData.attendance === "yes" && (
-              <div>
-                <label
-                  htmlFor="dietary"
-                  className="text-sage-dark font-medium text-sm leading-none"
-                >
-                  {t("rsvp.dietary")}
-                </label>
-                <textarea
-                  id="dietary"
-                  value={formData.dietary}
-                  maxLength={500}
-                  onChange={(e) => setFormData({ ...formData, dietary: e.target.value })}
-                  className="mt-2 flex min-h-[80px] w-full rounded-md border bg-ivory px-3 py-2 text-sm border-sage-dark/30 text-sage-dark placeholder:text-sage-dark/50 focus:outline-none focus:border-sage-dark"
-                  placeholder={t("rsvp.dietaryPlaceholder")}
-                  rows={3}
-                />
-              </div>
-            )}
+              <>
+                <div className="h-px bg-sage-dark/15 my-4" />
 
-            {formData.attendance === "yes" && (
-              <div>
-                <label className="text-sage-dark font-medium text-base leading-none">
-                  {t("rsvp.transport")}
-                </label>
-                <div className="flex flex-col gap-3 mt-3" role="radiogroup">
-                  <label
-                    htmlFor="transport-shuttle"
-                    className="flex items-start space-x-2 cursor-pointer"
-                  >
-                    <button
-                      type="button"
-                      role="radio"
-                      id="transport-shuttle"
-                      aria-checked={formData.transportation === "shuttle"}
-                      onClick={() => setFormData({ ...formData, transportation: "shuttle" })}
-                      className="aspect-square h-4 w-4 rounded-full border border-sage-dark text-sage-dark mt-0.5 flex items-center justify-center focus:outline-none"
-                    >
-                      {formData.transportation === "shuttle" && (
-                        <span className="h-2 w-2 rounded-full bg-sage-dark" />
-                      )}
-                    </button>
-                    <span className="cursor-pointer text-sage-dark leading-tight text-sm">
-                      {t("rsvp.shuttle")}
-                    </span>
+                {/* Mode of Travel to Udaipur */}
+                <div>
+                  <label className="font-serif text-sm sm:text-base text-sage-dark font-medium leading-normal mb-2.5 block">
+                    Mode of Travel to Udaipur
                   </label>
-
-                  <label
-                    htmlFor="transport-valet"
-                    className="flex items-start space-x-2 cursor-pointer"
-                  >
-                    <button
-                      type="button"
-                      role="radio"
-                      id="transport-valet"
-                      aria-checked={formData.transportation === "valet"}
-                      onClick={() => setFormData({ ...formData, transportation: "valet" })}
-                      className="aspect-square h-4 w-4 rounded-full border border-sage-dark text-sage-dark mt-0.5 flex items-center justify-center focus:outline-none"
-                    >
-                      {formData.transportation === "valet" && (
-                        <span className="h-2 w-2 rounded-full bg-sage-dark" />
-                      )}
-                    </button>
-                    <span className="cursor-pointer text-sage-dark leading-tight text-sm">
-                      {t("rsvp.valet")}
-                    </span>
-                  </label>
+                  <div className="grid grid-cols-2 gap-2.5" role="radiogroup">
+                    {["Flight", "Train", "By Car", "Bus / Other"].map((mode) => {
+                      const isSelected = formData.travelMode === mode;
+                      return (
+                        <button
+                          type="button"
+                          key={mode}
+                          onClick={() => setFormData({ ...formData, travelMode: mode })}
+                          className={`h-11 rounded-md border text-sm font-serif transition-colors flex items-center justify-center ${
+                            isSelected
+                              ? "bg-[#253d32] text-white border-[#253d32] font-semibold shadow-sm"
+                              : "bg-ivory text-sage-dark border-sage-dark/30 hover:border-sage-dark/60 font-normal"
+                          }`}
+                        >
+                          {mode}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+
+                {/* Arrival Date */}
+                <div>
+                  <label
+                    htmlFor="arrivalDate"
+                    className="font-serif text-sm sm:text-base text-sage-dark font-medium leading-normal mb-1.5 block"
+                  >
+                    Arrival Date
+                  </label>
+                  <input
+                    id="arrivalDate"
+                    type="date"
+                    value={formData.arrivalDate}
+                    onChange={(e) => setFormData({ ...formData, arrivalDate: e.target.value })}
+                    className="h-11 w-full rounded-md border border-sage-dark/30 bg-ivory px-3.5 py-2 text-sm font-serif text-sage-dark focus:border-sage-dark focus:outline-none"
+                  />
+                </div>
+
+                {/* Arrival Time */}
+                <div>
+                  <label
+                    htmlFor="arrivalTime"
+                    className="font-serif text-sm sm:text-base text-sage-dark font-medium leading-normal mb-1.5 block"
+                  >
+                    Arrival Time
+                  </label>
+                  <input
+                    id="arrivalTime"
+                    type="time"
+                    value={formData.arrivalTime}
+                    onChange={(e) => setFormData({ ...formData, arrivalTime: e.target.value })}
+                    className="h-11 w-full rounded-md border border-sage-dark/30 bg-ivory px-3.5 py-2 text-sm font-serif text-sage-dark focus:border-sage-dark focus:outline-none"
+                  />
+                </div>
+
+                {/* Departure Date */}
+                <div>
+                  <label
+                    htmlFor="departureDate"
+                    className="font-serif text-sm sm:text-base text-sage-dark font-medium leading-normal mb-1.5 block"
+                  >
+                    Departure Date
+                  </label>
+                  <input
+                    id="departureDate"
+                    type="date"
+                    value={formData.departureDate}
+                    onChange={(e) => setFormData({ ...formData, departureDate: e.target.value })}
+                    className="h-11 w-full rounded-md border border-sage-dark/30 bg-ivory px-3.5 py-2 text-sm font-serif text-sage-dark focus:border-sage-dark focus:outline-none"
+                  />
+                </div>
+
+                {/* Dietary requirements or special requests */}
+                <div>
+                  <label
+                    htmlFor="dietary"
+                    className="font-serif text-sm sm:text-base text-sage-dark font-medium leading-normal mb-1.5 block"
+                  >
+                    Dietary requirements or special requests
+                  </label>
+                  <textarea
+                    id="dietary"
+                    value={formData.dietary}
+                    maxLength={500}
+                    onChange={(e) => setFormData({ ...formData, dietary: e.target.value })}
+                    className="mt-1 flex min-h-[80px] w-full rounded-md border bg-ivory px-3 py-2 text-sm font-serif border-sage-dark/30 text-sage-dark placeholder:text-sage-dark/50 focus:outline-none focus:border-sage-dark"
+                    placeholder={t("rsvp.dietaryPlaceholder")}
+                    rows={3}
+                  />
+                </div>
+              </>
             )}
 
             <div>

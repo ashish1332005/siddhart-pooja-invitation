@@ -14,6 +14,7 @@ export function IntroHero({
 }: IntroHeroProps) {
   const [status, setStatus] = useState<"idle" | "playing" | "done">("idle");
   const [showText, setShowText] = useState(false);
+  const textShownRef = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const touchStartY = useRef<number | null>(null);
   const playStartTime = useRef<number>(0);
@@ -29,6 +30,7 @@ export function IntroHero({
     if (diff > 40) {
       setStatus("done");
       setShowText(true);
+      textShownRef.current = true;
       document.getElementById("swans-welcome")?.scrollIntoView({ behavior: "smooth" });
     }
     touchStartY.current = null;
@@ -46,31 +48,20 @@ export function IntroHero({
     };
   }, [status]);
 
-  useEffect(() => {
-    if (status === "playing") {
-      // Show text ONLY after curtains have fully parted open (at ~7.2s)
-      const textTimer = setTimeout(() => {
-        setShowText(true);
-      }, 7200);
-
-      // Auto-unlock page scroll and finalize view after video ends
-      const finishTimer = setTimeout(() => {
-        setStatus("done");
-        setShowText(true);
-      }, 9900);
-
-      return () => {
-        clearTimeout(textTimer);
-        clearTimeout(finishTimer);
-      };
-    }
-  }, [status]);
-
   const handleTimeUpdate = () => {
     const vid = videoRef.current;
-    if (!vid) return;
+    if (!vid || textShownRef.current) return;
     // Curtains fully part at 7.2 seconds
     if (vid.currentTime >= 7.2) {
+      textShownRef.current = true;
+      setShowText(true);
+    }
+  };
+
+  const handleEnded = () => {
+    setStatus("done");
+    if (!textShownRef.current) {
+      textShownRef.current = true;
       setShowText(true);
     }
   };
@@ -81,14 +72,18 @@ export function IntroHero({
     if (status === "idle") {
       setStatus("playing");
       setShowText(false);
+      textShownRef.current = false;
       playStartTime.current = Date.now();
       const vid = videoRef.current;
       if (vid) {
-        vid.currentTime = 0;
+        if (vid.currentTime > 0.1) {
+          vid.currentTime = 0;
+        }
         vid.play().catch(() => {
           setTimeout(() => {
             setStatus("done");
             setShowText(true);
+            textShownRef.current = true;
           }, 1500);
         });
       }
@@ -100,6 +95,7 @@ export function IntroHero({
     if (Date.now() - playStartTime.current < 2500) return;
     setStatus("done");
     setShowText(true);
+    textShownRef.current = true;
   };
 
   return (
@@ -117,23 +113,29 @@ export function IntroHero({
           className="absolute inset-0 h-full w-full object-cover select-none"
         />
 
-        {/* Gate Opening Video */}
-        {status !== "done" && (
-          <video
-            ref={videoRef}
-            src={MEDIA.introDoorsVideo}
-            poster={MEDIA.introDoorsPoster}
-            muted
-            playsInline
-            preload="auto"
-            onTimeUpdate={handleTimeUpdate}
-            onEnded={handleSkip}
-            onError={handleSkip}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
-              status === "idle" ? "opacity-0" : "opacity-100"
-            }`}
-          />
-        )}
+        {/* Gate Opening Video - Stays smoothly mounted on final frame with GPU hardware acceleration */}
+        <video
+          ref={videoRef}
+          src={MEDIA.introDoorsVideo}
+          poster={MEDIA.introDoorsPoster}
+          muted
+          playsInline
+          preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
+          onTimeUpdate={handleTimeUpdate}
+          onEnded={handleEnded}
+          onError={handleEnded}
+          style={{
+            transform: "translate3d(0, 0, 0)",
+            WebkitTransform: "translate3d(0, 0, 0)",
+            willChange: "transform",
+            backfaceVisibility: "hidden",
+          }}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
+            status === "idle" ? "opacity-0" : "opacity-100"
+          }`}
+        />
 
         {/* Monogram, Couple Names & Wedding Date - Fades in ONLY after curtains have fully opened */}
         <AnimatePresence>
@@ -154,7 +156,7 @@ export function IntroHero({
 
               {/* Groom & Bride Names + Wedding Date */}
               <div className="flex flex-col items-center justify-center w-full max-w-sm sm:max-w-md">
-                {/* Siddhart */}
+                {/* Pooja */}
                 <h1 className="font-couple text-[#7c2635] text-4xl sm:text-5xl md:text-6xl font-normal leading-[1.08] tracking-wide drop-shadow-sm my-0">
                   {coupleName1}
                 </h1>
@@ -168,12 +170,12 @@ export function IntroHero({
                   <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#b88e44]/75 to-[#b88e44]" />
                 </div>
 
-                {/* Pooja */}
+                {/* Siddhart */}
                 <h1 className="font-couple text-[#7c2635] text-4xl sm:text-5xl md:text-6xl font-normal leading-[1.08] tracking-wide drop-shadow-sm my-0">
                   {coupleName2}
                 </h1>
 
-                {/* Wedding Date directly on 1st Page - Solid Contiguous Text with No Extra Gaps */}
+                {/* Wedding Date directly on 1st Page */}
                 <p className="font-serif text-sm sm:text-base md:text-lg text-[#7c2635] font-semibold mt-4 sm:mt-5 tracking-[0.14em] uppercase whitespace-nowrap">
                   03RD &ndash; 05TH DECEMBER 2026
                 </p>
@@ -196,6 +198,7 @@ export function IntroHero({
                 e.stopPropagation();
                 setStatus("done");
                 setShowText(true);
+                textShownRef.current = true;
                 setTimeout(() => {
                   document.getElementById("swans-welcome")?.scrollIntoView({ behavior: "smooth" });
                 }, 50);
@@ -266,7 +269,7 @@ export function IntroHero({
             aria-label="Tap to open the invitation"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
           >
             <img
               src={MEDIA.introDoorsPoster}
